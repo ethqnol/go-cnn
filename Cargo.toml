@@ -1,0 +1,9 @@
+[package]
+name = "go-cnn"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+burn = { version = "0.16.0", features = ["wgpu", "train"] }
+burn-dataset = "0.16.0"
+derive-new = "0.7.0"
