@@ -1,16 +1,11 @@
 #![allow(unused_variables, dead_code, unused_imports)]
 
+use crate::data::dataset::*;
 use crate::data::sgf_parser::*;
 use burn::{data::dataloader::batcher::Batcher, prelude::*};
-
 #[derive(Clone, derive_new::new)]
 pub struct GoBatcher<B: Backend> {
     device: B::Device,
-}
-
-#[derive(Clone, Debug)]
-pub struct GoItem {
-    pub board: Vec<u8>,
 }
 
 #[derive(Clone, Debug)]
