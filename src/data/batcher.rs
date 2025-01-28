@@ -10,7 +10,7 @@ pub struct GoBatcher<B: Backend> {
 
 #[derive(Clone, Debug)]
 pub struct GoBatch<B: Backend> {
-    pub board_states: Tensor<B, 4, Int>,
+    pub board_states: Tensor<B, 3>,
     pub targets: Tensor<B, 1, Int>,
 }
 
@@ -27,13 +27,11 @@ impl<B: Backend> Batcher<GoItem, GoBatch<B>> for GoBatcher<B> {
             })
             .collect();
 
-        let board_states: Tensor<B, 4, Int> = Tensor::stack(
+        let board_states: Tensor<B, 3> = Tensor::stack(
             board_states
                 .iter()
-                .map(|item| TensorData::new(item.clone(), Shape::new([9, 9, 1])))
-                .map(|tensor_data| {
-                    Tensor::<B, 3, Int>::from_data(tensor_data, &self.device).permute([2, 0, 1])
-                })
+                .map(|item| TensorData::new(item.clone(), Shape::new([9, 9])))
+                .map(|tensor_data| Tensor::<B, 2>::from_data(tensor_data, &self.device))
                 .collect(),
             0,
         );
