@@ -58,6 +58,6 @@ pub fn encode_to_1d(loc: (usize, usize)) -> usize {
     return loc.0 * BOARD_SIZE + loc.1;
 }
 
-pub fn encode_to_2d(loc: usize) -> (usize, usize) {
+pub fn decode_to_2d(loc: usize) -> (usize, usize) {
     return (loc % BOARD_SIZE, loc / BOARD_SIZE);
 }
